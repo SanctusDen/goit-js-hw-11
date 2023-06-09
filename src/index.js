@@ -18,22 +18,13 @@ const perPage = 40;
 form.addEventListener('submit', onSearchForm);
 loading.classList.add('unvisible');
 
-axios.interceptors.res.use(
-  res => {
-    return res;
-  },
-  error => {
-    Notiflix.Notify.failure('Something went wrong. Please try again later.');
-    return Promise.reject(error);
-  },
-);
 
 async function fetchImages(query, page, perPage) {
   try {
-    const res = await axios.get(
+    const response = await axios.get(
       `?key=${API}&q=${query}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=${perPage}`,
     );
-    return res.data;
+    return response.data;
   }
   catch (error) {
       console.log(error);
